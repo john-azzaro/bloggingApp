@@ -69,6 +69,10 @@ app.post('/posts', (req, res) => {
     BlogPost.create({title, author, content}).then(post => {
         res.status(201).json(post.serialize());
     })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({ message: err.message});
+    });
 });
 
 // allows you to update title, author, and content fields.
@@ -77,7 +81,14 @@ app.put('/posts/:id', (req, res) => {});
 
 
 // allows you to delete a post with a given id.
-app.delete('/posts/:id', (req, res) => {});
+app.delete('/posts/:id', (req, res) => {
+    // sends back nothing (204)
+    BlogPost.findByIdAndDelete(req.params.id).then(res.status(204).end())
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({ message: err.message});
+    });
+});
 
 
 
@@ -90,6 +101,9 @@ app.delete('/posts/:id', (req, res) => {});
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
 // and then assign a value to it in run
+
+
+
 let server;
 
 function runServer(databaseUrl, port=PORT) {
@@ -111,11 +125,6 @@ function runServer(databaseUrl, port=PORT) {
   });
 }
 
-// `closeServer` function is here in original code
-
-if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
-};
 
 
 // close server
@@ -134,3 +143,7 @@ function closeServer() {
       });
     });
   }
+  
+  if (require.main === module) {
+  runServer(DATABASE_URL).catch(err => console.error(err));
+};
