@@ -4,7 +4,7 @@
     // NOTE: the reason why we can just put express is because its a node module.
 const express = require("express");  
 const mongoose = require('mongoose');
-
+const morgan = require("morgan");
 
 // From L2, 
 // config.js is where we control constants for entire
@@ -20,7 +20,7 @@ const app = express();
 
 
 
-
+// for each add internal server error
 
 // sends back all posts to database.
 app.get('/posts', (req, res) => {});
