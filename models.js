@@ -20,8 +20,7 @@ blogPostSchema.methods.serialize = function() {
             title: this.title, 
             content: this.content,
             author: this.authorName,
-            created: this._id.getTimestamp(),
-        
+            created: this._id.getTimestamp(),    
     }
 }
 
