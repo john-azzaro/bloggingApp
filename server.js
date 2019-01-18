@@ -24,7 +24,8 @@ const {BlogPost} = require("./models");
 // common is the standard output format, asking how you want morgan to work.
 // middleware comes right before routes, becuase routes is just a specialized form of middleware.
 app.use(morgan('common'));
-
+// this returns the json middleware
+app.use(express.json());
 
 
 
@@ -50,7 +51,7 @@ app.get('/posts', (req, res) => {
 app.get('/posts/:id', (req, res) => {
     BlogPost.findById(req.params.id).then(post => {
         if (post) {
-            res.json(post.serialize);
+            res.json(post.serialize());
         } else {
             res.status(404).json({ message: 'not found'});
         }
@@ -64,7 +65,10 @@ app.get('/posts/:id', (req, res) => {
 
 // endpoint for creating new blogposts.
 app.post('/posts', (req, res) => {
-    
+    const {title, author, content} = req.body; 
+    BlogPost.create({title, author, content}).then(post => {
+        res.status(201).json(post.serialize());
+    })
 });
 
 // allows you to update title, author, and content fields.
