@@ -1,13 +1,24 @@
 "use strict";
 
- // the reason why we can just put express is because its a node module.
+// import express and mongoose to make the following available to our application code.
+    // NOTE: the reason why we can just put express is because its a node module.
 const express = require("express");  
 const mongoose = require('mongoose');
 
-const app = express();
+
+// From L2, 
+// config.js is where we control constants for entire
+// app like PORT and DATABASE_URL
+// const {PORT, DATABASE_URL} = require('./config');
+
 
 mongoose.Promise = global.Promise;
 const {BlogPost} = require("./models");
+
+const app = express();
+
+
+
 
 
 
@@ -17,8 +28,8 @@ app.get('/posts', (req, res) => {});
 // sends back a single blog post with :id if it exists, using schema below.
 app.get('/posts/:id', (req, res) => {});
 
-// blog post schema
-BlogPost.create({});
+// blog post schema from models.js or is this different
+BlogPost
 
 
 
