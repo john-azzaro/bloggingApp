@@ -20,11 +20,19 @@ app.get('/posts/:id', (req, res) => {});
 // blog post schema
 BlogPost.create({});
 
-// 
+
+
+// endpoint for creating new blogposts.
 app.post('/posts', (req, res) => {});
 
+// allows you to update title, author, and content fields.
 app.put('/posts/:id', (req, res) => {});
 
+
+
+// allows you to delete a post.
+app.delete('/:id', (req, res) => {});
+
+// allows you to delete a post with a given id.
 app.delete('/posts/:id', (req, res) => {});
 
-app.delete('/:id', (req, res) => {});
