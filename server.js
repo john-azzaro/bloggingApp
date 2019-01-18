@@ -29,7 +29,8 @@ app.use(express.json());
 
 
 
-
+// testing note.
+// once you get to the point where you have your get/post, etc. you'll want to test on postman to see if they work with get, push, delete requests. see notes.
 
 
 // for each add internal server error
