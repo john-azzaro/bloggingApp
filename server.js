@@ -77,7 +77,16 @@ app.post('/posts', (req, res) => {
 });
 
 // allows you to update title, author, and content fields.
-app.put('/posts/:id', (req, res) => {});
+
+app.get('/posts/:id', (req, res) => {
+    BlogPost
+      .findById(req.params.id)
+      .then(post => res.json(post.serialize()))
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'something went horribly awry' });
+      });
+  });
 
 
 
